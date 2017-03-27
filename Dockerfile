@@ -1,4 +1,4 @@
-FROM java:8-jdk-alpine
+FROM java:8-jdk
 
 MAINTAINER Vincent Spiewak <vspiewak@gmail.com>
 
@@ -16,23 +16,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0" \
       org.label-schema.license="MIT"
-
-RUN apk add --update \
-    openssl \
-    sed \
-    ca-certificates \
-    bash \
-    openssh \
-    make \
-    git \
-    jq \
-    libstdc++ \
-    libpng-dev \
-    nasm \
-    build-base \
-    python \
-    python-dev \
-  && rm -rf /var/cache/apk/*
 
 ENV SCALA_VERSION 2.11.8
 ENV SBT_VERSION 0.13.13
@@ -59,7 +42,7 @@ RUN git config --global user.email "git@localhost" && \
 
 # install git resource (and disable LFS, which we happen not to need)
 RUN mkdir -p /opt/resource/git && \
-    wget https://github.com/concourse/git-resource/archive/master.zip -O /opt/resource/git/git-resource.zip && \
+    curl -L -o /opt/resource/git/git-resource.zip https://github.com/concourse/git-resource/archive/master.zip && \
     unzip /opt/resource/git/git-resource.zip -d /opt/resource/git && \
     mv /opt/resource/git/git-resource-master/assets/* /opt/resource/git && \
     rm -r /opt/resource/git/git-resource.zip /opt/resource/git/git-resource-master && \
