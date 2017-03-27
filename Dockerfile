@@ -17,6 +17,11 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0" \
       org.label-schema.license="MIT"
 
+# Install tools
+RUN \
+  apt-get update && \
+  apt-get install -y jq
+
 ENV SCALA_VERSION 2.11.8
 ENV SBT_VERSION 0.13.13
 
