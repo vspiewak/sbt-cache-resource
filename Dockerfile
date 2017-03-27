@@ -8,6 +8,13 @@ RUN apk update && apk add --no-cache \
     curl \
     git
 
+# Install git lfs
+RUN curl -sLO https://github.com/github/git-lfs/releases/download/v2.0.1/git-lfs-linux-amd64-2.0.1.tar.gz && \
+    tar xf git-lfs-linux-amd64-2.0.1.tar.gz && \
+    mv git-lfs-2.0.1/git-lfs /usr/bin/ && \
+    rm -Rf git-lfs-2.0.1
+
+
 # Pull down git resource into our dockerfile
 RUN mkdir -p /opt/resource/git && mkdir -p /var/cache/git && \
     wget https://github.com/concourse/git-resource/archive/master.zip -O /opt/resource/git/git-resource.zip && \
