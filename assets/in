@@ -13,11 +13,6 @@ GIT_DEST_DIR="$(mktemp -d -t git-resource-destination.XXXXXX)"
 /opt/resource/git/in "$GIT_DEST_DIR"
 
 PAYLOAD=$(echo /tmp/git-resource-request.*)
-
-load_pubkey $PAYLOAD
-configure_git_ssl_verification $PAYLOAD
-configure_credentials $PAYLOAD
-
 PROJECT_PATH=$(jq -r '.source["project-path"] // ""' < $PAYLOAD)
 
 cd "$GIT_DEST_DIR/$PROJECT_PATH"
