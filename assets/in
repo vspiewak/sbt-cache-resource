@@ -22,6 +22,8 @@ PROJECT_PATH=$(jq -r '.source["project-path"] // ""' < $PAYLOAD)
 
 cd "$GIT_DEST_DIR/$PROJECT_PATH"
 
+sbt update >&2
+
 mv ~/.ivy2/ "$DEST_DIR/"
 
 echo "Cached $(du -hs "$DEST_DIR/" | cut -f 1) in $(find "$DEST_DIR/" -type f | wc -l) files"
