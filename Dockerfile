@@ -4,6 +4,7 @@ MAINTAINER Vincent Spiewak <vspiewak@googlemailadress>
 RUN apk update && apk add --no-cache \
     openssl \
     openssh-client \
+    bash \
     jq \
     curl \
     git
